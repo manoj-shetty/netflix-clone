@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMovies, getGenres } from '../store/index.js'
+import Slider from '../components/Slider';
 
 const Netflix = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -21,7 +22,7 @@ const Netflix = () => {
 
     useEffect(() => {
         if (genresLoaded) dispatch(fetchMovies({ type: "all" }));
-    });
+    },[genresLoaded]);
 
     window.onscroll = () => {
         setIsScrolled(window.pageYOffset === 0 ? false : true);
@@ -46,6 +47,7 @@ const Netflix = () => {
                     </div>
                 </div>
             </div>
+            <Slider movies={movies} />
         </Container>
     )
 }
